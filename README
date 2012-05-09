@@ -70,4 +70,10 @@ Using that command will give square modulus.
 
 To get a matrix element of the form < iota_i | H(\kappa) | iota_j >
 
+use the command 
 
+../../get_matrix_element.py iota021 iota022 ../../kappa/eigenvalues
+
+This will print the real and imaginary part of the matrix element. Essientially this tells you what the coupling between iota021 and iota022 is when they are _in the presence of the combined Hamiltonian_
+
+Cool right?
