@@ -1,13 +1,12 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
-# the eig.dat file is of the form
+# the eigenvalue file is of the form
 # 1  1 1  -24.305 -24.305
 
 import sys
 import numpy as np
 import scipy
 import random
-import pylab
 from numpy import linalg as LA
 
 

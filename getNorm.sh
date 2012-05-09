@@ -4,7 +4,7 @@
 # the FFT grid is not the same on all three sets of wfns, you've not included enough unoccupied kappa,
 # or some other user error
 
-for file in iota??? beta???
+for file in iota???
 do
   echo -n $file " "
   awk '/#/{print $0} !/#/{sum+=($2*$2. + $3*$3.); print sum}'  $file | tail -1
