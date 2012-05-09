@@ -19,9 +19,9 @@ For the code I used, the real and imaginary part of the wavefunction was actuall
 You should see the following output:
 
  # The norm of the isolated state is   3455999.9821567237     
- # I think there should be     3456000 i.e.    99.999999483701501      %
-           1 -0.46954201505784937       0.87873213954149121     
-           2 -7.04689635864237055E-003  1.31880306517494130E-002
+ # I think there should be     3456000 i.e.    99.99 %
+ 1 -0.46954201505784937       0.87873213954149121     
+ 2 -7.04689635864237055E-003  1.31880306517494130E-002
 
 The first two lines are the header, and are a basic sanity check. If you don't see a value close to 100%, it means there is probably a mismatch between the gridpoints between your iota and kappa wavefunctions, or the number of gridpoints in the file has not been understood by the code. Having that number be close to 100% is a necessary though not sufficient condition for normal operation.
 
