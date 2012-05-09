@@ -13,9 +13,9 @@ character(128) fin, fin_real, fin_imag, iso_real, iso_imag, std_dir
 complex(8) ISO_wfn(:),KS_wfn(:), sum
 allocatable :: ISO_wfn, KS_wfn, real_value, imag_value
 
-nx = 270
-ny = 63
-nz = 39
+nx = 288   ! these need to be set to dim of wfn file
+ny = 100
+nz = 120
 nvoxel = nx*ny*nz
 
 nband_KS = 2 ! this is system specific 
@@ -24,13 +24,10 @@ pi = 2.0*asin(1.0)
 
 CALL getarg(1,iso_real)
 CALL getarg(2,iso_imag)
-!CALL getarg(3,std_dir)
 
 ! Open necessary files
 open(1,file=iso_real,status='old')
 open(2,file=iso_imag,status='old')
-!open(2,file="vdos.dat",status='unknown')
-!open(2,file=fin,status='old')
 
 ! Get the number of steps
 Nsteps = 0
@@ -69,7 +66,7 @@ do i=1,nvoxel
 end do
 
 print *, '# The norm of the isolated state is', real(norm)
-print *, '# I think there should be', nx*ny*nz, 'i.e. ', real(norm)*100./(nx*ny*nz), '%'
+print *, '# I think it should be', nx*ny*nz, 'i.e. ', real(norm)*100./(nx*ny*nz), '%'
 
 close(1)
 close(2)
@@ -84,7 +81,6 @@ do ii=1,nband_KS
     allocate( real_value(nx*ny*nz) )
     allocate( imag_value(nx*ny*nz) )
 
-!!!!  this is for the wider filename
        if      (ii < 10)   then
          write(unit=filecounter1, fmt='(I1)') ii 
          open(1,file="../kappa/WR.01.001.0000" // filecounter1 // ".dx",status='old')
@@ -124,11 +120,6 @@ do ii=1,nband_KS
    norm = norm + KS_wfn(i)*CONJG(KS_wfn(i))
   end do
 
-!  print *, 'The norm of the KS file is', norm
-!  print *, 'Based on (nx)(ny)(nz) I think there should be', nx*ny*nz, 'i.e. ', real(norm)*100./(nx*ny*nz), '%'
-
-!  print *, 'I will now proceed to do the projection'
-
   sum = 0.
 
   do i=1,nvoxel
@@ -136,7 +127,6 @@ do ii=1,nband_KS
   end do
 
 
-!  print *, ii, real(CONJG(sum)*sum/(nx*ny*nz)**2.)
   alpha = sum/(nx*ny*nz)
   print *, ii, real(alpha), aimag(alpha)
 
