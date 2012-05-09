@@ -9,7 +9,7 @@ character(5) dummy1, dummy2, dummy3, dummy4
 complex(8) complex_value, expectation_value, alpha_lhs, alpha_rhs, operator_val, sum
 allocatable :: operator_value
 
-nband_KS = 999
+nband_KS = 1244 
 allocate(operator_value(nband_KS))
 
 ! Define pi
