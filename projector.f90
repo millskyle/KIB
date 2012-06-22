@@ -106,7 +106,7 @@ do ii=1,nband_KS
 
   end do
 
-  do i=1,nvoxel    ! there are 5 numbers per line
+  do i=1,nvoxel/5   ! there are 5 numbers per line
       read(1,*,err=400) (real_value((i-1)*5 + ik),ik=1,5)
       read(2,*,err=400) (imag_value((i-1)*5 + ik),ik=1,5)
   end do
