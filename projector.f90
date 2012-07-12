@@ -51,7 +51,7 @@ allocate( ISO_wfn(nx*ny*nz) )
 allocate( real_value(nx*ny*nz) )
 allocate( imag_value(nx*ny*nz) )
 
-do i=1,nvoxel    ! there are 5 numbers per line
+do i=1,nvoxel/5    ! there are 5 numbers per line
       read(1,*,err=300) (real_value((i-1)*5 + ik),ik=1,5)
       read(2,*,err=300) (imag_value((i-1)*5 + ik),ik=1,5)
 end do
