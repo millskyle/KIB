@@ -9,6 +9,8 @@ character(5) dummy1, dummy2, dummy3, dummy4
 complex(8) complex_value, expectation_value, alpha_lhs, alpha_rhs, operator_val, sum
 allocatable :: operator_value
 
+print *, "Does this do what I think it does?"
+
 nband_KS = 1244 
 allocate(operator_value(nband_KS))
 

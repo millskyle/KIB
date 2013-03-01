@@ -9,67 +9,63 @@ import scipy
 import random
 from numpy import linalg as LA
 
+inputFile = open(sys.argv[1],'r')  # this gives the projection of the iota onto each kappa state
+for line in inputFile:
+    last=line
+diagonal_n = int(last.split()[0]) # figures out how many states are used in projection
+print diagonal_n
 
-inputFile = open(sys.argv[1],'r')  # this gives the projection of the HOMO onto each KS state
+inputFile.seek(0) # rewind
 
+inputFile.readline() # skip header
 inputFile.readline()
-inputFile.readline()
 
-LHS_DFT = []
+
+LHS_DFT = np.zeros(diagonal_n, dtype=np.complex)
 
 for line in inputFile.readlines():
 
     n, alpha = int(line.split()[0]) - 1, np.complex(float(line.split()[1]), float(line.split()[2]))
-    LHS_DFT.append(alpha)
+    LHS_DFT[n] = alpha
 
 inputFile.close()
-
-LHS_DFT = np.array(LHS_DFT, dtype=np.complex)
-
 
 inputFile = open(sys.argv[2],'r')  # this gives the projection of the HOMO onto each KS state
 
-inputFile.readline()
+inputFile.readline() # skip header
 inputFile.readline()
 
-RHS_DFT = []
-
-diagonal_n = 0
+RHS_DFT = np.zeros(diagonal_n, dtype=np.complex)
 
 for line in inputFile.readlines():
 
     n, alpha = int(line.split()[0]) - 1, np.complex(float(line.split()[1]), float(line.split()[2]))
-    RHS_DFT.append(alpha)
-    diagonal_n += 1
+    RHS_DFT[n] = alpha
 
 inputFile.close()
 
-RHS_DFT = np.array(RHS_DFT, dtype=np.complex)
-
 inputFile = open(sys.argv[3],'r')
 
-eig_dft_array = []
-eig_gw_array = []
+eig_dft_array = np.zeros(diagonal_n, dtype=np.float)
+eig_gw_array = np.zeros(diagonal_n, dtype=np.float)
 
 iprime = []
 
-for i in range(diagonal_n):
-    line = inputFile.readline()
-    eig_dft_array.append(float(line.split()[3]))
-    eig_gw_array.append(float(line.split()[4]))
+for line in inputFile.readlines():
+    n = int(line.split()[0]) - 1
+    eig_dft_array[n] = float(line.split()[3])
+    eig_gw_array[n]  = float(line.split()[4])
     
 sum_dft = 0.
 sum_gw = 0.
 
 for i in range(diagonal_n):
 
-
     omega_dft = eig_dft_array[i]
     omega_gw = eig_gw_array[i]
         
     sum_dft += LHS_DFT[i]*omega_dft*np.conj(RHS_DFT[i])
     sum_gw +=  LHS_DFT[i]*omega_gw*np.conj(RHS_DFT[i])
-
 
 inputFile.close()
 
