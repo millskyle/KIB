@@ -97,3 +97,5 @@ This will print the real and imaginary part of the matrix element. Essientially 
 This is how bonds form.
 
 Cool right?
+
+*** I will be adding vasp compatiblity shortly (or at least I plan to, thanks to this: http://www.andrew.cmu.edu/user/feenstra/wavetrans/)
